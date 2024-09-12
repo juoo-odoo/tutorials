@@ -5,16 +5,16 @@ from odoo.tools.float_utils import float_is_zero, float_compare
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Property estates"
+    _order = 'id DESC'
 
     state = fields.Selection(
-        default='New',
+        default='new',
         string='Stage',
-        selection=[('New', 'New'), ('Offer_Received', 'Offer Received'), ('Offer_Accepted', 'Offer Accepted'), ('Sold', 'Sold'), ('Canceled', 'Canceled')],
+        selection=[('new', 'New'), ('offer_received', 'Offer Received'), ('offer_accepted', 'Offer Accepted'), ('sold', 'Sold'), ('canceled', 'Canceled')],
     )
     active = fields.Boolean(default=True)
 
-
-    property_type = fields.Many2one(
+    property_type_id = fields.Many2one(
         "estate.property.type",
         string="Property Type",
         default=lambda self: self.env['estate.property.type'].search([], limit=1)
@@ -90,15 +90,15 @@ class EstateProperty(models.Model):
     # actions
     def action_mark_as_sold(self):
         self.ensure_one()
-        if self.state == 'Canceled':
+        if self.state == 'canceled':
             # _ underscore is for translation
             raise UserError(_('Cancelled properties cannot be sold'))
-        self.state = 'Sold'
+        self.state = 'sold'
         return True # have to return somehing from public methods so XML-RPC layer(?) works
 
     def action_mark_as_cancelled(self):
         self.ensure_one()
-        if self.state == 'Sold':
+        if self.state == 'sold':
             raise UserError(_('Sold properties cannot be cancelled'))
-        self.state = 'Canceled'
+        self.state = 'canceled'
         return True # have to return somehing from public methods so XML-RPC layer(?) works
