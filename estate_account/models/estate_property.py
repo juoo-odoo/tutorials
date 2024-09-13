@@ -2,7 +2,8 @@ from odoo import fields, models, Command
 
 class EstateProperty(models.Model):
     _inherit = "estate.property"
-
+    
+    # is this unsafe? sudo'd command on a public(?) method
     def action_mark_as_sold(self):
         print('Overrriden sold action')
         # selects the MISCELLANOUS journal
