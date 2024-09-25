@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="awesome_dashboard.AwesomeDashboard">
+
+        <Layout className="'o_dashboard'" display="{controlPanel: {}}">
+            <t t-set-slot="layout-buttons">
+                <button class="btn btn-primary" t-on-click="openCustomers">Customers</button>
+                <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
+            </t>
+            <!-- <t t-for-each="" t-key="" t-id="item"/> -->
+            <DashboardItem>
+                <span class="card-title">Average number of T-Shirt by order this month</span>
+                <h1><t t-out="dashboard.data['average_quantity']" /></h1>
+            </DashboardItem>
+            <DashboardItem size="2">
+                <span class="card-title">Average time for an order to go from 'New' to 'Sent'/'Cancelled'</span>
+                <h1><t t-out="dashboard.data['average_time']" /></h1>
+            </DashboardItem>
+            <DashboardItem>
+                <span class="card-title">Number of new orders this month</span>
+                <h1><t t-out="dashboard.data['nb_new_orders']" /></h1>
+            </DashboardItem>
+            <DashboardItem>
+                <span class="card-title">Number of cancelled orders this month</span>
+                <h1><t t-out="dashboard.data['nb_cancelled_orders']" /></h1>
+            </DashboardItem>
+            <DashboardItem>
+                <span class="card-title">Total amount of new orders this month</span>
+                <h1><t t-out="dashboard.data['total_amount']" /></h1>
+            </DashboardItem>
+            <DashboardItem>
+                <span class="card-title">Shirt orders by size</span>
+                <PieChart data="dashboard.data['orders_by_size']"/>
+            </DashboardItem>
+        </Layout>
+    </t>
+
+</templates>
+
+            <!-- 'average_quantity': random.randint(4, 12),
+            'average_time': random.randint(4, 123),
+            'nb_cancelled_orders': random.randint(0, 50),
+            'nb_new_orders': random.randint(10, 200),
+            'orders_by_size': {
+                'm': random.randint(0, 150),
+                's': random.randint(0, 150),
+                'xl': random.randint(0, 150),
+            },
+            'total_amount': random.randint(100, 1000) -->
