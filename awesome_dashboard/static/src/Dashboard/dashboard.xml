@@ -8,12 +8,16 @@
                 <button class="btn btn-primary" t-on-click="openCustomers">Customers</button>
                 <button class="btn btn-primary" t-on-click="openLeads">Leads</button>
             </t>
-            <!-- <t t-for-each="" t-key="" t-id="item"/> -->
-            <DashboardItem>
-                <span class="card-title">Average number of T-Shirt by order this month</span>
-                <h1><t t-out="dashboard.data['average_quantity']" /></h1>
-            </DashboardItem>
-            <DashboardItem size="2">
+            <t t-set-slot="control-panel-additional-actions">
+                <i class="fa fa-cog" style="align-self: center" t-on-click="showConfig" data-hotkey="u" data-tooltip="Config"/>
+            </t>
+            <t t-foreach="items.data" t-key="item.id" t-as="item">
+                <DashboardItem size="item.size">
+                    <t t-set="itemProp" t-value="item.props ? item.props(dashboard.data) : {'data': dashboard.data}"/>
+                    <t t-component='item.Component' t-props="itemProp"/>
+                </DashboardItem>
+            </t>
+            <!-- <DashboardItem size="2">
                 <span class="card-title">Average time for an order to go from 'New' to 'Sent'/'Cancelled'</span>
                 <h1><t t-out="dashboard.data['average_time']" /></h1>
             </DashboardItem>
@@ -32,7 +36,7 @@
             <DashboardItem>
                 <span class="card-title">Shirt orders by size</span>
                 <PieChart data="dashboard.data['orders_by_size']"/>
-            </DashboardItem>
+            </DashboardItem> -->
         </Layout>
     </t>
 

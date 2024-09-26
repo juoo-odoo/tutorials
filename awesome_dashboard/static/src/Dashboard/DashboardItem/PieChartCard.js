@@ -3,9 +3,10 @@
 import { Component, useRef, useEffect, onWillStart, xml } from "@odoo/owl";
 import { loadJS } from "@web/core/assets"
 
-export class PieChart extends Component {
-    static props = ['data']
+export class PieChartCard extends Component {
+    static props = ['title', 'value']
     static template = xml`
+        <span class="card-title"><t t-out="props.title" /></span>
         <canvas t-ref="tshirt-chart" width="400" height="400" />
     `
 
@@ -20,9 +21,10 @@ export class PieChart extends Component {
 
         useEffect(
             () => {
+                console.log(this.props)
                 if (!this.chartRef.el) return;
 
-                const { s, m, l, xl } = this.props.data
+                const { s, m, l, xl } = this.props.value
 
                 if (curChart) curChart.destroy();
 
@@ -37,7 +39,7 @@ export class PieChart extends Component {
                     options: {}
                 });
             },
-            () => [this.chartRef.el, curChart, this.props.data]
+            () => [this.chartRef.el, curChart, this.props.value]
         );
         this.size = this.props.size || 1
     }

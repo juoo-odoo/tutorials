@@ -14,15 +14,18 @@ export const statisticsService = {
         // reactive tracks changes in an obj/arr
         let statistics = reactive({ data: {} })
 
+        var timer;
+
         const loadStatistics = async () => {
             let stats = await rpc("/awesome_dashboard/statistics")
             statistics.data = stats
+
+            timer = setTimeout(() => {
+                loadStatistics();
+            }, 5 * SECOND_IN_MS)
             return statistics
         }
 
-        setInterval(() => {
-            loadStatistics();
-        }, 5 * SECOND_IN_MS)
 
         return { statistics, loadStatistics }
     },
