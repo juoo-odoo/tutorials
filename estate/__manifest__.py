@@ -1,7 +1,7 @@
 {
     'name': 'estate',
     'depends': [
-        'base'
+        'base', 'mail'
     ],
     'data': [
         'security/ir.model.access.csv',

@@ -7,6 +7,8 @@ class EstateProperty(models.Model):
     _description = "Property estates"
     _order = 'id DESC'
 
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    
     state = fields.Selection(
         default='new',
         string='Stage',

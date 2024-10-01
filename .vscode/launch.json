@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "17",
+            "type": "python",
+            "request": "launch",
+            "cwd": "/home/odoo/Desktop/Onboarding/odoo-comm/",
+            "python": "/usr/bin/python3", // /home/mds/.pyenv/versions/3.11.2/envs/odoo_17/bin/python",
+            "program": "./odoo-bin",
+            "args": [
+                // "shell",
+                "-c", "../odoo-tutorial/.vscode/odoo.cfg",
+                "--log-handler",
+                "odoo.addons.base.models.ir_attzchment:WARNING",
+
+                // "-d", "acacia-22-2", "-i", "sale_acacia",
+                "-d", "odoo_owl", 
+
+                "--limit-time-real", "0",
+                "--limit-time-cpu", "0",
+                "--dev=reload,qweb,xml",
+                "--max-cron-threads", "0",
+            ],
+            "console": "integratedTerminal"
+        }, 
+
+    ]
+}
