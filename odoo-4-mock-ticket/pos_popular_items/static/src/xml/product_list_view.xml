@@ -1,0 +1,13 @@
+<templates xml:space="preserve">
+
+    
+
+    <t t-inherit="point_of_sale.ProductsWidget" t-inherit-mode="extension">
+        <xpath expr="//ProductCard" position="attributes">
+            <attribute name="quantitySold">product.qty_sold</attribute>
+            <attribute name="internalReference">product.default_code</attribute>
+        </xpath>
+    </t>
+
+
+</templates>

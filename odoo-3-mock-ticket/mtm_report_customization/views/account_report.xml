@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <record id="paperformat_custom_report" model="report.paperformat">
+            <field name="name">A4 - MTM Report Customization</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">85</field>
+            <field name="margin_bottom">32</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">80</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="account_mtm_custom_invoice" model="ir.actions.report">
+            <field name="name">MTM Custom Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">mtm_report_customization.custom_report_invoice</field>
+            <field name="report_file">mtm_report_customization.custom_report_invoice</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment"/>
+            <field name="paperformat_id" ref="mtm_report_customization.paperformat_custom_report" />
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>
