@@ -1,0 +1,46 @@
+<templates xml:space="preserve">
+
+    
+
+    <t t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension">
+
+        <xpath expr="//input[@name='name']" position="replace">
+            <div />
+        </xpath>
+        <xpath expr="//div/div/t[@t-as='item']" position="attributes">
+            <attribute name="t-foreach">['first_name', 'last_name', 'Street', 'City', 'Zip', 'Email', 'Phone', 'Mobile', 'Barcode' ]</attribute>
+        </xpath>
+        <xpath expr="//div/div/t[@t-as='item']" position="after">
+            <div class="partner-detail col">
+                <label class="form-label label" t-attf-for="account_number" t-esc="partnerDetailsFields['account_number']"/>
+                <input
+                    class="detail form-control"
+                    t-attf-id="account_number"
+                    t-attf-name="account_number"
+                    t-model="changes['account_number'.toLowerCase()]"
+                    t-attf-placeholder=""
+                    t-att="{'disabled': 1}"
+                    t-att-class="{'border-danger': missingFields.includes('account_number'.toLowerCase())}" />
+            </div>
+        </xpath>
+        
+        <xpath expr="//div/div[@class='partner-detail col'][1]" position="before">
+            <div class="partner-detail col">
+                <label class="form-label label" for="contact_type">Contact Type</label>
+                <t t-set="contact_types" t-value="[['vendor', 'Vendor'],  ['customer', 'Customer'], ['internal_location', 'Internal Location']]" />
+                <select class="detail form-select" id="contact_type" name="contact_type_dropdown" t-model="changes.contact_type" t-att="{'disabled': isFieldCommercialAndPartnerIsChild('contact_type')}" t-att-class="{'border-danger': missingFields.includes('contact_type')}">
+                    <t t-foreach="contact_types" t-as="contactType" t-key="contactType[0]">
+                        <option t-att-selected="props.partner.contact_type == contactType[0] ? true : false" t-att-value="contactType[0]">
+                            <t t-esc="contactType[1]" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+        </xpath>
+        <!-- <xpath expr="//input[@t-as='account_number']/.." position="attributes">
+            <attribute name="disabled">1</attribute>
+        </xpath> -->
+    </t>
+
+
+</templates>

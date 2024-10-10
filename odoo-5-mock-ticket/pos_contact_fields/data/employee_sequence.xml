@@ -1,0 +1,9 @@
+<data>
+    <record id="pos_contact_fields_account_number_sequence" model="ir.sequence">
+        <field name="name">Account Number sequence</field>
+        <field name="code">pos_contact_fields.account_number_sequence</field>
+        <field name="prefix">1</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+    </record>
+ </data>
